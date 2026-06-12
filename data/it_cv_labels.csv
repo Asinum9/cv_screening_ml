@@ -1,0 +1,181 @@
+candidate_id,target_role,seniority_level
+CAND_001,Frontend Developer,Junior
+CAND_002,Frontend Developer,Junior
+CAND_003,Frontend Developer,Junior
+CAND_004,Frontend Developer,Junior
+CAND_005,Frontend Developer,Junior
+CAND_006,Frontend Developer,Junior
+CAND_007,Frontend Developer,Junior
+CAND_008,Frontend Developer,Junior
+CAND_009,Frontend Developer,Junior
+CAND_010,Frontend Developer,Junior
+CAND_011,Frontend Developer,Middle
+CAND_012,Frontend Developer,Middle
+CAND_013,Frontend Developer,Middle
+CAND_014,Frontend Developer,Middle
+CAND_015,Frontend Developer,Middle
+CAND_016,Frontend Developer,Middle
+CAND_017,Frontend Developer,Middle
+CAND_018,Frontend Developer,Middle
+CAND_019,Frontend Developer,Middle
+CAND_020,Frontend Developer,Middle
+CAND_021,Frontend Developer,Senior
+CAND_022,Frontend Developer,Senior
+CAND_023,Frontend Developer,Senior
+CAND_024,Frontend Developer,Senior
+CAND_025,Frontend Developer,Senior
+CAND_026,Frontend Developer,Senior
+CAND_027,Frontend Developer,Senior
+CAND_028,Frontend Developer,Senior
+CAND_029,Frontend Developer,Senior
+CAND_030,Frontend Developer,Senior
+CAND_031,Backend Developer,Junior
+CAND_032,Backend Developer,Junior
+CAND_033,Backend Developer,Junior
+CAND_034,Backend Developer,Junior
+CAND_035,Backend Developer,Junior
+CAND_036,Backend Developer,Junior
+CAND_037,Backend Developer,Junior
+CAND_038,Backend Developer,Junior
+CAND_039,Backend Developer,Junior
+CAND_040,Backend Developer,Junior
+CAND_041,Backend Developer,Middle
+CAND_042,Backend Developer,Middle
+CAND_043,Backend Developer,Middle
+CAND_044,Backend Developer,Middle
+CAND_045,Backend Developer,Middle
+CAND_046,Backend Developer,Middle
+CAND_047,Backend Developer,Middle
+CAND_048,Backend Developer,Middle
+CAND_049,Backend Developer,Middle
+CAND_050,Backend Developer,Middle
+CAND_051,Backend Developer,Senior
+CAND_052,Backend Developer,Senior
+CAND_053,Backend Developer,Senior
+CAND_054,Backend Developer,Senior
+CAND_055,Backend Developer,Senior
+CAND_056,Backend Developer,Senior
+CAND_057,Backend Developer,Senior
+CAND_058,Backend Developer,Senior
+CAND_059,Backend Developer,Senior
+CAND_060,Backend Developer,Senior
+CAND_061,AI Engineer,Junior
+CAND_062,AI Engineer,Junior
+CAND_063,AI Engineer,Junior
+CAND_064,AI Engineer,Junior
+CAND_065,AI Engineer,Junior
+CAND_066,AI Engineer,Junior
+CAND_067,AI Engineer,Junior
+CAND_068,AI Engineer,Junior
+CAND_069,AI Engineer,Junior
+CAND_070,AI Engineer,Junior
+CAND_071,AI Engineer,Middle
+CAND_072,AI Engineer,Middle
+CAND_073,AI Engineer,Middle
+CAND_074,AI Engineer,Middle
+CAND_075,AI Engineer,Middle
+CAND_076,AI Engineer,Middle
+CAND_077,AI Engineer,Middle
+CAND_078,AI Engineer,Middle
+CAND_079,AI Engineer,Middle
+CAND_080,AI Engineer,Middle
+CAND_081,AI Engineer,Senior
+CAND_082,AI Engineer,Senior
+CAND_083,AI Engineer,Senior
+CAND_084,AI Engineer,Senior
+CAND_085,AI Engineer,Senior
+CAND_086,AI Engineer,Senior
+CAND_087,AI Engineer,Senior
+CAND_088,AI Engineer,Senior
+CAND_089,AI Engineer,Senior
+CAND_090,AI Engineer,Senior
+CAND_091,Machine Learning Engineer,Junior
+CAND_092,Machine Learning Engineer,Junior
+CAND_093,Machine Learning Engineer,Junior
+CAND_094,Machine Learning Engineer,Junior
+CAND_095,Machine Learning Engineer,Junior
+CAND_096,Machine Learning Engineer,Junior
+CAND_097,Machine Learning Engineer,Junior
+CAND_098,Machine Learning Engineer,Junior
+CAND_099,Machine Learning Engineer,Junior
+CAND_100,Machine Learning Engineer,Junior
+CAND_101,Machine Learning Engineer,Middle
+CAND_102,Machine Learning Engineer,Middle
+CAND_103,Machine Learning Engineer,Middle
+CAND_104,Machine Learning Engineer,Middle
+CAND_105,Machine Learning Engineer,Middle
+CAND_106,Machine Learning Engineer,Middle
+CAND_107,Machine Learning Engineer,Middle
+CAND_108,Machine Learning Engineer,Middle
+CAND_109,Machine Learning Engineer,Middle
+CAND_110,Machine Learning Engineer,Middle
+CAND_111,Machine Learning Engineer,Senior
+CAND_112,Machine Learning Engineer,Senior
+CAND_113,Machine Learning Engineer,Senior
+CAND_114,Machine Learning Engineer,Senior
+CAND_115,Machine Learning Engineer,Senior
+CAND_116,Machine Learning Engineer,Senior
+CAND_117,Machine Learning Engineer,Senior
+CAND_118,Machine Learning Engineer,Senior
+CAND_119,Machine Learning Engineer,Senior
+CAND_120,Machine Learning Engineer,Senior
+CAND_121,QA Engineer,Junior
+CAND_122,QA Engineer,Junior
+CAND_123,QA Engineer,Junior
+CAND_124,QA Engineer,Junior
+CAND_125,QA Engineer,Junior
+CAND_126,QA Engineer,Junior
+CAND_127,QA Engineer,Junior
+CAND_128,QA Engineer,Junior
+CAND_129,QA Engineer,Junior
+CAND_130,QA Engineer,Junior
+CAND_131,QA Engineer,Middle
+CAND_132,QA Engineer,Middle
+CAND_133,QA Engineer,Middle
+CAND_134,QA Engineer,Middle
+CAND_135,QA Engineer,Middle
+CAND_136,QA Engineer,Middle
+CAND_137,QA Engineer,Middle
+CAND_138,QA Engineer,Middle
+CAND_139,QA Engineer,Middle
+CAND_140,QA Engineer,Middle
+CAND_141,QA Engineer,Senior
+CAND_142,QA Engineer,Senior
+CAND_143,QA Engineer,Senior
+CAND_144,QA Engineer,Senior
+CAND_145,QA Engineer,Senior
+CAND_146,QA Engineer,Senior
+CAND_147,QA Engineer,Senior
+CAND_148,QA Engineer,Senior
+CAND_149,QA Engineer,Senior
+CAND_150,QA Engineer,Senior
+CAND_151,Flutter Developer,Junior
+CAND_152,Flutter Developer,Junior
+CAND_153,Flutter Developer,Junior
+CAND_154,Flutter Developer,Junior
+CAND_155,Flutter Developer,Junior
+CAND_156,Flutter Developer,Junior
+CAND_157,Flutter Developer,Junior
+CAND_158,Flutter Developer,Junior
+CAND_159,Flutter Developer,Junior
+CAND_160,Flutter Developer,Junior
+CAND_161,Flutter Developer,Middle
+CAND_162,Flutter Developer,Middle
+CAND_163,Flutter Developer,Middle
+CAND_164,Flutter Developer,Middle
+CAND_165,Flutter Developer,Middle
+CAND_166,Flutter Developer,Middle
+CAND_167,Flutter Developer,Middle
+CAND_168,Flutter Developer,Middle
+CAND_169,Flutter Developer,Middle
+CAND_170,Flutter Developer,Middle
+CAND_171,Flutter Developer,Senior
+CAND_172,Flutter Developer,Senior
+CAND_173,Flutter Developer,Senior
+CAND_174,Flutter Developer,Senior
+CAND_175,Flutter Developer,Senior
+CAND_176,Flutter Developer,Senior
+CAND_177,Flutter Developer,Senior
+CAND_178,Flutter Developer,Senior
+CAND_179,Flutter Developer,Senior
+CAND_180,Flutter Developer,Senior

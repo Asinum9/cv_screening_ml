@@ -1,0 +1,52 @@
+Machine Learning CV Screening Evaluation Report
+================================================
+
+This report proves the project is ML-based because a supervised
+Logistic Regression model was trained using TF-IDF text features.
+
+Dataset file: /Users/munisa/Documents/Codex/2026-06-12/i-am-building-a-btec-unit/CV_Screening_System/data/it_cv_synthetic_dataset_180.csv
+Input feature X: cleaned_text
+Target label y: target_role
+Total usable rows: 180
+Training rows: 144
+Testing rows: 36
+
+Model Configuration
+-------------------
+Vectorizer: TfidfVectorizer(max_features=5000, ngram_range=(1, 2))
+Classifier: LogisticRegression(max_iter=1000, class_weight='balanced')
+
+Evaluation Metrics
+------------------
+Accuracy: 1.0000
+Precision (weighted): 1.0000
+Recall (weighted): 1.0000
+F1-score (weighted): 1.0000
+
+Classification Report
+---------------------
+                           precision    recall  f1-score   support
+
+              AI Engineer       1.00      1.00      1.00         6
+        Backend Developer       1.00      1.00      1.00         6
+        Flutter Developer       1.00      1.00      1.00         6
+       Frontend Developer       1.00      1.00      1.00         6
+Machine Learning Engineer       1.00      1.00      1.00         6
+              QA Engineer       1.00      1.00      1.00         6
+
+                 accuracy                           1.00        36
+                macro avg       1.00      1.00      1.00        36
+             weighted avg       1.00      1.00      1.00        36
+
+Confusion Matrix Labels
+-----------------------
+['AI Engineer', 'Backend Developer', 'Flutter Developer', 'Frontend Developer', 'Machine Learning Engineer', 'QA Engineer']
+
+Confusion Matrix
+----------------
+[[6 0 0 0 0 0]
+ [0 6 0 0 0 0]
+ [0 0 6 0 0 0]
+ [0 0 0 6 0 0]
+ [0 0 0 0 6 0]
+ [0 0 0 0 0 6]]
