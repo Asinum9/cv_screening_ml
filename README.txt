@@ -46,6 +46,25 @@ CV_Screening_System/
     |-- scoring.py
     `-- openai_explanation.py
 
+Project Architecture
+--------------------
+This project is a Streamlit machine learning application.
+
+It does not use a separate frontend, backend, and database server.
+Instead, Streamlit allows the user interface and Python logic to work together in one app.
+
+In this project:
+- The frontend is in app.py.
+  This is where the user enters a job description, uploads CV files, and views the ranked results.
+- The backend logic is written in Python.
+  It extracts CV text, cleans the text, predicts the candidate role, matches skills, calculates scores, and creates explanations.
+- The database layer is simple CSV file storage.
+  The data folder stores the synthetic CV dataset, labels, and job description templates.
+
+This structure is suitable for a university prototype.
+It is easy to run on one computer.
+It also clearly shows the machine learning workflow needed for the project.
+
 Important Note About Dataset Files
 ----------------------------------
 Place these prepared files inside the data/ folder before training:
