@@ -30,6 +30,7 @@ CV_Screening_System/
 |-- User_Manual.md
 |-- data/
 |   |-- it_cv_synthetic_dataset_180.csv
+|   |-- it_cv_synthetic_dataset_900.csv
 |   |-- it_cv_labels.csv
 |   `-- it_job_description_templates_18.csv
 |-- models/
@@ -68,9 +69,14 @@ It also clearly shows the machine learning workflow needed for the project.
 Important Note About Dataset Files
 ----------------------------------
 Place these prepared files inside the data/ folder before training:
-- data/it_cv_synthetic_dataset_180.csv
+- data/it_cv_synthetic_dataset_900.csv
 - data/it_cv_labels.csv
 - data/it_job_description_templates_18.csv
+
+The dataset was expanded from 180 to 900 synthetic anonymized resumes.
+This improves model reliability and candidate ranking accuracy.
+The new dataset includes 150 resumes per role.
+Each role has 50 Junior, 50 Middle, and 50 Senior resumes.
 
 The model files in models/ are created after running train_model.py.
 The evaluation files in outputs/ are also created after training.
@@ -117,10 +123,11 @@ Run:
    streamlit run app.py
 
 Then:
-1. Paste a job description.
-2. Upload multiple CV files in PDF, DOCX, or TXT format.
-3. Click "Screen and Rank Candidates".
-4. Review predicted role, ML confidence, job description similarity, skill match score, final score, recommendation, matched skills, missing skills, ranking, and explanation.
+1. Select the target role.
+2. Paste a job description.
+3. Upload multiple CV files in PDF, DOCX, or TXT format.
+4. Click "Start CV Analysis".
+5. Review predicted role, role match, ML confidence, job description similarity, skill match score, final score, recommendation, matched skills, missing skills, ranking, and explanation.
 
 Machine Learning Method
 -----------------------
@@ -130,6 +137,7 @@ This project uses:
 - Cosine similarity to compare CV text with the job description
 - Skill matching to identify matched and missing job-related skills
 - Weighted scoring to rank candidates
+- Role matching to compare the predicted CV role with the selected target role
 
 Final Score Formula
 -------------------
@@ -138,10 +146,16 @@ Final score is calculated as:
 - 30% job description similarity
 - 20% skill match score
 
+Role match adjustment:
+- The user selects the target role in the app.
+- If the predicted CV role matches the selected target role, the score is kept.
+- If the predicted CV role does not match the selected target role, the final score is reduced by 50%.
+- Top 3 recommended candidates only include candidates with Role Match = Yes and Final Score >= 60.
+
 Recommendation rules:
-- 80-100 = Strong Fit
-- 60-79 = Medium Fit
-- Below 60 = Weak Fit
+- 80-100 and Role Match = Yes = Strong Fit
+- 60-79 and Role Match = Yes = Medium Fit
+- Below 60 or Role Match = No = Weak Fit / Not Recommended
 
 Ethical and Privacy Handling
 ----------------------------

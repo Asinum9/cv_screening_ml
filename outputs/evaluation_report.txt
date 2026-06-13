@@ -4,12 +4,12 @@ Machine Learning CV Screening Evaluation Report
 This report proves the project is ML-based because a supervised
 Logistic Regression model was trained using TF-IDF text features.
 
-Dataset file: /Users/munisa/Documents/Codex/2026-06-12/i-am-building-a-btec-unit/CV_Screening_System/data/it_cv_synthetic_dataset_180.csv
+Dataset file: /Users/munisa/Documents/Codex/2026-06-12/i-am-building-a-btec-unit/CV_Screening_System/data/it_cv_synthetic_dataset_900.csv
 Input feature X: cleaned_text
 Target label y: target_role
-Total usable rows: 180
-Training rows: 144
-Testing rows: 36
+Total usable rows: 900
+Training rows: 720
+Testing rows: 180
 
 Model Configuration
 -------------------
@@ -27,16 +27,16 @@ Classification Report
 ---------------------
                            precision    recall  f1-score   support
 
-              AI Engineer       1.00      1.00      1.00         6
-        Backend Developer       1.00      1.00      1.00         6
-        Flutter Developer       1.00      1.00      1.00         6
-       Frontend Developer       1.00      1.00      1.00         6
-Machine Learning Engineer       1.00      1.00      1.00         6
-              QA Engineer       1.00      1.00      1.00         6
+              AI Engineer       1.00      1.00      1.00        30
+        Backend Developer       1.00      1.00      1.00        30
+        Flutter Developer       1.00      1.00      1.00        30
+       Frontend Developer       1.00      1.00      1.00        30
+Machine Learning Engineer       1.00      1.00      1.00        30
+              QA Engineer       1.00      1.00      1.00        30
 
-                 accuracy                           1.00        36
-                macro avg       1.00      1.00      1.00        36
-             weighted avg       1.00      1.00      1.00        36
+                 accuracy                           1.00       180
+                macro avg       1.00      1.00      1.00       180
+             weighted avg       1.00      1.00      1.00       180
 
 Confusion Matrix Labels
 -----------------------
@@ -44,9 +44,9 @@ Confusion Matrix Labels
 
 Confusion Matrix
 ----------------
-[[6 0 0 0 0 0]
- [0 6 0 0 0 0]
- [0 0 6 0 0 0]
- [0 0 0 6 0 0]
- [0 0 0 0 6 0]
- [0 0 0 0 0 6]]
+[[30  0  0  0  0  0]
+ [ 0 30  0  0  0  0]
+ [ 0  0 30  0  0  0]
+ [ 0  0  0 30  0  0]
+ [ 0  0  0  0 30  0]
+ [ 0  0  0  0  0 30]]

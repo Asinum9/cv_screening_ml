@@ -9,27 +9,37 @@ SKILL_BANK: Dict[str, List[str]] = {
     "Frontend Developer": [
         "html", "css", "javascript", "typescript", "react", "vue", "angular",
         "redux", "responsive design", "accessibility", "tailwind", "bootstrap",
+        "next.js", "api integration", "jest", "cypress", "web performance",
+        "figma", "storybook", "vite",
     ],
     "Backend Developer": [
         "python", "java", "node.js", "django", "flask", "fastapi", "spring",
         "sql", "postgresql", "mysql", "mongodb", "rest api", "docker",
+        "kubernetes", "spring boot", "authentication", "jwt", "microservices",
+        "api documentation", "azure", "aws",
     ],
     "AI Engineer": [
         "artificial intelligence", "nlp", "computer vision", "deep learning",
         "tensorflow", "pytorch", "transformers", "llm", "prompt engineering",
+        "rag", "langchain", "openai api", "vector databases", "embeddings",
+        "fine-tuning", "guardrails", "agentic ai", "pinecone", "chromadb",
     ],
     "Machine Learning Engineer": [
         "machine learning", "scikit-learn", "pandas", "numpy", "model training",
         "feature engineering", "classification", "regression", "mlops", "statistics",
+        "pytorch", "tensorflow", "mlflow", "model deployment", "model evaluation",
+        "feature store", "model registry", "batch inference",
     ],
     "ML Engineer": [
         "machine learning", "scikit-learn", "sklearn", "pandas", "numpy",
         "model training", "feature engineering", "classification", "regression",
-        "tensorflow", "pytorch", "statistics",
+        "tensorflow", "pytorch", "statistics", "mlflow", "model deployment",
     ],
     "QA Engineer": [
         "testing", "manual testing", "automation testing", "selenium", "pytest",
         "test cases", "bug tracking", "jira", "api testing", "postman",
+        "quality assurance", "regression testing", "testrail", "allure reports",
+        "selenium webdriver", "ci/cd",
     ],
     "Business Analyst": [
         "business analysis", "requirements gathering", "stakeholder management",
@@ -39,6 +49,8 @@ SKILL_BANK: Dict[str, List[str]] = {
     "Flutter Developer": [
         "flutter", "dart", "firebase", "mobile development", "android", "ios",
         "state management", "bloc", "provider", "rest api",
+        "mobile ui", "push notifications", "app store deployment", "sqlite",
+        "flutter devtools", "cross-platform widgets",
     ],
 }
 

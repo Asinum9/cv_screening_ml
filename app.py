@@ -13,7 +13,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from utils.openai_explanation import generate_candidate_explanation
 from utils.preprocessing import clean_text
-from utils.scoring import calculate_final_score, calculate_skill_score, get_recommendation
+from utils.scoring import calculate_final_score, calculate_skill_score
 from utils.skills import match_skills
 from utils.text_extraction import extract_text_from_uploaded_file
 
@@ -22,6 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent
 MODEL_FILE = BASE_DIR / "models" / "resume_classifier.pkl"
 VECTORIZER_FILE = BASE_DIR / "models" / "tfidf_vectorizer.pkl"
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt"}
+TARGET_ROLE_OPTIONS = [
+    "Frontend Developer",
+    "Backend Developer",
+    "AI Engineer",
+    "Machine Learning Engineer",
+    "QA Engineer",
+    "Flutter Developer",
+]
 
 
 st.set_page_config(
@@ -63,7 +71,24 @@ def calculate_job_similarity(cleaned_cv_text: str, cleaned_job_description: str,
     return float(similarity * 100)
 
 
-def screen_candidate(uploaded_file, job_description: str, model, vectorizer) -> dict:
+def apply_role_match_penalty(final_score: float, predicted_role: str, target_role: str) -> tuple:
+    """Reduce the final score by 50% when the predicted role does not match the selected role."""
+    role_match = "Yes" if predicted_role == target_role else "No"
+    if role_match == "No":
+        return round(final_score * 0.50, 2), role_match, "Yes"
+    return final_score, role_match, "No"
+
+
+def get_recommendation_with_role_match(final_score: float, role_match: str) -> str:
+    """Return the recommendation using both score and selected-role match."""
+    if role_match == "No" or final_score < 60:
+        return "Weak Fit / Not Recommended"
+    if final_score >= 80:
+        return "Strong Fit"
+    return "Medium Fit"
+
+
+def screen_candidate(uploaded_file, job_description: str, target_role: str, model, vectorizer) -> dict:
     """Process one CV file and return a complete ranking result."""
     file_extension = Path(uploaded_file.name).suffix.lower()
     if file_extension not in SUPPORTED_EXTENSIONS:
@@ -82,11 +107,18 @@ def screen_candidate(uploaded_file, job_description: str, model, vectorizer) -> 
     jd_similarity = calculate_job_similarity(cleaned_cv_text, cleaned_job_description, vectorizer)
     matched_skills, missing_skills = match_skills(cleaned_cv_text, cleaned_job_description, predicted_role)
     skill_match_score = calculate_skill_score(matched_skills, missing_skills)
-    final_score = calculate_final_score(jd_similarity, skill_match_score, ml_confidence)
-    recommendation = get_recommendation(final_score)
+    base_final_score = calculate_final_score(jd_similarity, skill_match_score, ml_confidence)
+    final_score, role_match, penalty_applied = apply_role_match_penalty(
+        base_final_score,
+        predicted_role,
+        target_role,
+    )
+    recommendation = get_recommendation_with_role_match(final_score, role_match)
 
     explanation = generate_candidate_explanation(
         predicted_role=predicted_role,
+        target_role=target_role,
+        role_match=role_match,
         recommendation=recommendation,
         final_score=final_score,
         confidence_score=ml_confidence,
@@ -98,10 +130,15 @@ def screen_candidate(uploaded_file, job_description: str, model, vectorizer) -> 
 
     return {
         "Candidate file name": uploaded_file.name,
+        "Extracted text length": len(raw_cv_text),
+        "Selected target role": target_role,
         "Predicted role": predicted_role,
+        "Role match": role_match,
         "ML confidence": round(ml_confidence, 2),
         "Job description similarity": round(jd_similarity, 2),
         "Skill match score": round(skill_match_score, 2),
+        "Base final score": base_final_score,
+        "Penalty applied": penalty_applied,
         "Final score": final_score,
         "Recommendation": recommendation,
         "Matched skills": ", ".join(matched_skills) if matched_skills else "None",
@@ -163,9 +200,9 @@ def show_project_notes() -> None:
         st.write("20% skill match")
 
         st.markdown("**Recommendation Levels:**")
-        st.write("80–100: Strong Fit")
-        st.write("60–79: Medium Fit")
-        st.write("Below 60: Weak Fit")
+        st.write("80–100 and Role Match = Yes: Strong Fit")
+        st.write("60–79 and Role Match = Yes: Medium Fit")
+        st.write("Below 60 or Role Match = No: Weak Fit / Not Recommended")
 
         st.markdown("**Strong Fit:**")
         st.write(
@@ -218,6 +255,11 @@ def main() -> None:
 
     show_project_notes()
 
+    target_role = st.selectbox(
+        "Select Target Role",
+        TARGET_ROLE_OPTIONS,
+    )
+
     st.subheader("Job Description")
     st.write(
         "Paste the job description here. Include the required role, skills, tools, "
@@ -259,7 +301,7 @@ def main() -> None:
         with st.spinner("Extracting CV text, predicting roles, and ranking candidates..."):
             for uploaded_file in uploaded_files:
                 try:
-                    results.append(screen_candidate(uploaded_file, job_description, model, vectorizer))
+                    results.append(screen_candidate(uploaded_file, job_description, target_role, model, vectorizer))
                 except Exception as exc:
                     errors.append(f"{uploaded_file.name}: {exc}")
 
@@ -278,13 +320,19 @@ def main() -> None:
 
         strong_count = sum(item["Recommendation"] == "Strong Fit" for item in ranked_results)
         medium_count = sum(item["Recommendation"] == "Medium Fit" for item in ranked_results)
-        weak_count = sum(item["Recommendation"] == "Weak Fit" for item in ranked_results)
+        weak_count = sum(item["Recommendation"] == "Weak Fit / Not Recommended" for item in ranked_results)
         highest_score = max(item["Final score"] for item in ranked_results)
+        suitable_candidates = [
+            item for item in ranked_results
+            if item["Role match"] == "Yes" and item["Final score"] >= 60
+        ]
 
         display_columns = [
             "Rank",
             "Candidate file name",
+            "Selected target role",
             "Predicted role",
+            "Role match",
             "ML confidence",
             "Job description similarity",
             "Skill match score",
@@ -294,13 +342,13 @@ def main() -> None:
 
         display_table = ranked_table[display_columns].rename(columns={
             "Candidate file name": "Candidate File",
+            "Selected target role": "Selected Target Role",
             "Predicted role": "Predicted Role",
+            "Role match": "Role Match",
             "ML confidence": "AI Confidence",
             "Job description similarity": "Job Match",
             "Skill match score": "Skill Match",
             "Final score": "Final Score",
-            "Matched skills": "Matched Skills",
-            "Missing skills": "Missing Skills",
         })
 
         st.subheader("Analysis Summary")
@@ -323,14 +371,28 @@ def main() -> None:
             "These candidates received the highest final scores and are recommended "
             "for HR review."
         )
-        for rank, candidate in enumerate(ranked_results[:3], start=1):
+        if not suitable_candidates:
+            st.warning(
+                "No suitable candidates found for this role. Please review more CVs "
+                "or adjust the job description."
+            )
+
+        for rank, candidate in enumerate(suitable_candidates[:3], start=1):
             title = f"Candidate Details: {candidate['Candidate file name']}"
             with st.expander(title, expanded=True):
                 col1, col2, col3, col4 = st.columns(4)
-                col1.metric("Predicted Role", candidate["Predicted role"])
-                col2.metric("AI Confidence", f"{candidate['ML confidence']}%")
-                col3.metric("Job Match", f"{candidate['Job description similarity']}%")
-                col4.metric("Skill Match", f"{candidate['Skill match score']}%")
+                col1.metric("Selected Target Role", candidate["Selected target role"])
+                col2.metric("Predicted Role", candidate["Predicted role"])
+                col3.metric("Role Match", candidate["Role match"])
+                col4.metric("Final Score", f"{candidate['Final score']}/100")
+
+                col5, col6, col7 = st.columns(3)
+                col5.metric("AI Confidence", f"{candidate['ML confidence']}%")
+                col6.metric("Job Match", f"{candidate['Job description similarity']}%")
+                col7.metric("Skill Match", f"{candidate['Skill match score']}%")
+
+                st.write(f"Role mismatch penalty applied: {candidate['Penalty applied']}")
+                st.write(f"Recommendation: {candidate['Recommendation']}")
 
                 st.write("Matched Skills:")
                 st.write(candidate["Matched skills"])
@@ -342,6 +404,33 @@ def main() -> None:
                 st.warning(
                     "This result is an AI-assisted recommendation only. Final hiring "
                     "decisions should be reviewed and approved by HR specialists."
+                )
+
+        st.subheader("Candidate Debugging Information")
+        for candidate in ranked_results:
+            debug_title = f"Debug: {candidate['Candidate file name']}"
+            with st.expander(debug_title):
+                st.write(f"Extracted text length: {candidate['Extracted text length']}")
+                st.write(f"Selected target role: {candidate['Selected target role']}")
+                st.write(f"Predicted role: {candidate['Predicted role']}")
+                st.write(f"Role match status: {candidate['Role match']}")
+                st.write(f"ML confidence: {candidate['ML confidence']}%")
+                st.write(f"JD similarity: {candidate['Job description similarity']}%")
+                st.write(f"Skill match: {candidate['Skill match score']}%")
+                st.write(f"Role mismatch penalty applied: {candidate['Penalty applied']}")
+                st.write(f"Final score: {candidate['Final score']}/100")
+                st.write(f"Recommendation: {candidate['Recommendation']}")
+                st.write(f"Matched Skills: {candidate['Matched skills']}")
+                st.write(f"Missing Skills: {candidate['Missing skills']}")
+                st.write(f"Explanation: {candidate['Explanation']}")
+                if candidate["Role match"] == "No":
+                    st.warning(
+                        "Role mismatch detected. This CV may be suitable for another "
+                        "IT role, but it does not match the selected vacancy."
+                    )
+                st.write(
+                    "HR Review Note: This result is an AI-assisted recommendation only. "
+                    "Final hiring decisions should be reviewed and approved by HR specialists."
                 )
 
         csv_data = display_table.to_csv(index=False).encode("utf-8")

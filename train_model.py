@@ -30,7 +30,7 @@ from sklearn.model_selection import train_test_split
 
 # Project folders and file paths.
 BASE_DIR = Path(__file__).resolve().parent
-DATA_FILE = BASE_DIR / "data" / "it_cv_synthetic_dataset_180.csv"
+DATA_FILE = BASE_DIR / "data" / "it_cv_synthetic_dataset_900.csv"
 MODEL_DIR = BASE_DIR / "models"
 OUTPUT_DIR = BASE_DIR / "outputs"
 
