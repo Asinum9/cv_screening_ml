@@ -268,6 +268,15 @@ def apply_custom_styles() -> None:
             display: none !important;
         }
 
+        [data-testid="stFileUploaderDropzoneInstructions"],
+        [data-testid="stFileUploaderDropzone"] [class*="Instructions"],
+        [data-testid="stFileUploaderDropzone"] [class*="instructions"],
+        [data-testid="stFileUploaderDropzone"] div:has(> small),
+        [data-testid="stFileUploaderDropzone"] div:has(> span):not(:has(button)),
+        [data-testid="stFileUploaderDropzone"] p {
+            display: none !important;
+        }
+
         [data-testid="stFileUploader"] {
             color: var(--ink) !important;
             color-scheme: light !important;
