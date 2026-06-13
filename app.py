@@ -268,6 +268,23 @@ def apply_custom_styles() -> None:
             display: none !important;
         }
 
+        [data-testid="stFileUploaderDropzoneInstructions"],
+        [data-testid="stFileUploaderDropzone"] [class*="Instructions"],
+        [data-testid="stFileUploaderDropzone"] [class*="instructions"],
+        [data-testid="stFileUploaderDropzone"] div:has(> small),
+        [data-testid="stFileUploaderDropzone"] p {
+            display: none !important;
+        }
+
+        [data-testid="stFileUploaderDropzone"] button,
+        [data-testid="stFileUploaderDropzone"] button *,
+        [data-testid="stFileUploaderDropzone"] button span,
+        [data-testid="stFileUploaderDropzone"] button svg {
+            display: inline-flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
         [data-testid="stFileUploader"] {
             color: var(--ink) !important;
             color-scheme: light !important;
